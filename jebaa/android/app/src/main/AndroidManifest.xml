@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jebaa">
+    package="com.ieclub.jebm3ak">
    <application
         android:label="jebaa"
         android:icon="@mipmap/ic_launcher">

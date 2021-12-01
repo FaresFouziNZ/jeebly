@@ -1,4 +1,4 @@
-package com.example.jebaa
+package com.ieclub.jebm3ak
 
 import io.flutter.embedding.android.FlutterActivity
 
