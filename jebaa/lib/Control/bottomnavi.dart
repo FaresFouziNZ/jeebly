@@ -12,6 +12,9 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      backgroundColor: Colors.black87,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey,
       currentIndex: _currentIndex,
       onTap: (_index) => setState(() => _currentIndex = _index),
       showSelectedLabels: false,

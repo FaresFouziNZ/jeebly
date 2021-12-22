@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jebaa/Views/mainpage.dart';
 import 'package:splashscreen/splashscreen.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import '../Classes/trip.dart';
 
 class Welcome extends StatefulWidget {
@@ -12,27 +12,23 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
-  @override
-  void initState() {
-    super.initState();
-    //TODO get all open trips
-    //List<Trip> tripsList = getTrips();
-  }
-
-  Future<void> getTrips() async {
+  Future<Widget> start() async {
+    await Firebase.initializeApp();
     List<Trip> s;
+    return MainView(
+      trips: s,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 3,
       backgroundColor: Colors.black54,
       image: const Image(
         image: AssetImage(
             'assets/png-clipart-gray-haired-girl-mayuri-shiina-steins-gate-anime-tutu-ru-music-gudi-manga-head.png'),
       ),
-      navigateAfterSeconds: const MainView(),
+      navigateAfterFuture: start(),
     );
   }
 }

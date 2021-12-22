@@ -1,4 +1,3 @@
-// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:jebaa/classes/order.dart';
 import 'package:jebaa/classes/user.dart';
@@ -9,11 +8,11 @@ class Trip {
   User user; // from the user
   List<Order> orders;
   String status;
-  TimeOfDay h;
-  Trip({this.tid, this.destination, this.user, this.orders, this.status, this.h});
+  TimeOfDay time;
+  Trip({this.tid, this.destination, this.user, this.orders, this.status, this.time});
 
   Map<String, dynamic> toMap() {
-    return {'tid': tid, 'uid': user, 'destination': destination, 'orders': orders, 'isClosed': status, 'time': h};
+    return {'tid': tid, 'uid': user, 'destination': destination, 'orders': orders, 'isClosed': status, 'time': time};
   }
 
   factory Trip.fromMap(Map<dynamic, dynamic> map) {
@@ -24,6 +23,6 @@ class Trip {
         destination: map['destination'],
         orders: map['orders'],
         status: map['status'],
-        h: map['time']);
+        time: map['time']);
   }
 }

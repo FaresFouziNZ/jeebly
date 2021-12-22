@@ -8,7 +8,6 @@ void main() {
     // initialRoute: ,
     routes: {
       '/': (context) => const Welcome(),
-      '/searching': (context) => const MainView(),
     },
   ));
 }
