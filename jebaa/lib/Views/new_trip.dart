@@ -4,14 +4,14 @@ import 'package:jebaa/Control/restaurantcard.dart';
 
 class NewTripView extends StatelessWidget {
   NewTripView({Key key}) : super(key: key);
-  TimeOfDay _time = TimeOfDay(hour: 12, minute: 12);
+  TimeOfDay _time = const TimeOfDay(hour: 12, minute: 12);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('New Trip'),
-      ),
-      body: Center(
+    return SizedBox(
+      // appBar: AppBar(
+      //   title: const Text('New Trip'),
+      // ),
+      child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -22,7 +22,7 @@ class NewTripView extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsets.only(
-                    left: 50,
+                    left: 25,
                   ),
                   child: Text(
                     'Restaurants',
@@ -33,49 +33,52 @@ class NewTripView extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 //decoration: BoxDecoration(border: Border.all(width: 1)),
-                child: GridView.count(
-                  crossAxisCount: 3,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
                   children: [
-                    RestaurantCard(
-                      restaurant: Restaurant(name: 'raiq'),
+                    const SizedBox(
+                      width: 15,
                     ),
                     RestaurantCard(
                       restaurant: Restaurant(name: 'raiq'),
                     ),
-                    RestaurantCard(
-                      restaurant: Restaurant(name: 'raiq'),
+                    const SizedBox(
+                      width: 15,
                     ),
                     RestaurantCard(
                       restaurant: Restaurant(name: 'raiq'),
-                    )
+                    ),
                   ],
                 ),
-                //color: Colors.amber,
+                color: Colors.grey[300],
                 width: 350,
-                height: 400,
+                height: 110,
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(right: 25),
-                    child: Icon(Icons.calendar_today_rounded),
-                  ),
-                  Container(
-                    width: 300,
-                    height: 50,
-                    decoration: BoxDecoration(border: Border.all(width: 1)),
-                    //color: Colors.green[50],
-                    child: Center(
-                        child: Text(
-                      _time.format(context),
-                      style: const TextStyle(fontSize: 30),
-                    )),
-                  )
-                ],
+              child: Container(
+                color: Colors.grey[300],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(right: 25),
+                      child: Icon(Icons.calendar_today_rounded),
+                    ),
+                    Container(
+                      width: 300,
+                      height: 50,
+                      decoration: BoxDecoration(border: Border.all(width: 1)),
+                      //color: Colors.green[50],
+                      child: Center(
+                          child: Text(
+                        _time.format(context),
+                        style: const TextStyle(fontSize: 30),
+                      )),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -85,6 +88,9 @@ class NewTripView extends StatelessWidget {
                   style: ElevatedButton.styleFrom(minimumSize: const Size(350, 50)),
                   child: const Text('Place the Trip!')),
             ),
+            const SizedBox(
+              height: 10,
+            )
           ],
         ),
       ),

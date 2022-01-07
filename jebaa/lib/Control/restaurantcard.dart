@@ -11,8 +11,8 @@ class RestaurantCard extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: 93,
-          height: 93,
+          width: 80,
+          height: 80,
           child: Card(
             color: Colors.red,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

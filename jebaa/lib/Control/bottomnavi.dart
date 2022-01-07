@@ -12,7 +12,7 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.black87,
+      backgroundColor: Colors.blue,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.grey,
       currentIndex: _currentIndex,
@@ -22,7 +22,7 @@ class _MyBottomNavigatorState extends State<MyBottomNavigator> {
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
         BottomNavigationBarItem(icon: Icon(Icons.receipt), label: "rec"),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: "set")
+        BottomNavigationBarItem(icon: Icon(Icons.settings), label: "set"),
       ],
     );
   }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jebaa/Classes/trip.dart';
 import 'package:jebaa/Control/bottomnavi.dart';
 import 'package:jebaa/Control/tripcard.dart';
-import 'package:flutter_login/flutter_login.dart';
 import 'package:jebaa/Views/new_trip.dart';
+import 'package:flutter_login/flutter_login.dart';
 
 class MainView extends StatefulWidget {
   List<Trip> trips;
@@ -18,10 +18,6 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Colors.transparent,
-        //   title: const Text('wg'),
-        // ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -74,11 +70,19 @@ class _MainViewState extends State<MainView> {
             child: Image.asset(
                 'assets/png-clipart-gray-haired-girl-mayuri-shiina-steins-gate-anime-tutu-ru-music-gudi-manga-head.png'),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NewTripView()),
-              );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => NewTripView()),
+              // );
+              showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SingleChildScrollView(
+                      child: NewTripView(),
+                    );
+                  });
             }),
+        //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: const MyBottomNavigator(),
       ),
     );
