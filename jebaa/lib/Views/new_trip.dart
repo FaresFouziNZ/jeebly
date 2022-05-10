@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:jebaa/Classes/restaurant.dart';
-import 'package:jebaa/Control/restaurantcard.dart';
+import 'package:jebaa/Widgets/restaurantcard.dart';
 
-class NewTripView extends StatelessWidget {
+class NewTripView extends StatefulWidget {
   NewTripView({Key key}) : super(key: key);
-  TimeOfDay _time = const TimeOfDay(hour: 12, minute: 12);
+
+  @override
+  State<NewTripView> createState() => _NewTripViewState();
+}
+
+class _NewTripViewState extends State<NewTripView> {
+  TimeOfDay _time = TimeOfDay.now();
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -37,36 +44,41 @@ class NewTripView extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   children: [
                     const SizedBox(
-                      width: 15,
+                      width: 5,
                     ),
                     RestaurantCard(
                       restaurant: Restaurant(name: 'raiq'),
                     ),
-                    const SizedBox(
-                      width: 15,
+                    RestaurantCard(
+                      restaurant: Restaurant(name: 'raiq'),
+                    ),
+                    RestaurantCard(
+                      restaurant: Restaurant(name: 'raiq'),
+                    ),
+                    RestaurantCard(
+                      restaurant: Restaurant(name: 'raiq'),
                     ),
                     RestaurantCard(
                       restaurant: Restaurant(name: 'raiq'),
                     ),
                   ],
                 ),
-                color: Colors.grey[300],
+                //color: Colors.grey[300],
                 width: 350,
                 height: 110,
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                color: Colors.grey[300],
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(right: 25),
-                      child: Icon(Icons.calendar_today_rounded),
-                    ),
-                    Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(right: 25),
+                    child: Icon(Icons.calendar_today_rounded),
+                  ),
+                  GestureDetector(
+                    child: Container(
                       width: 300,
                       height: 50,
                       decoration: BoxDecoration(border: Border.all(width: 1)),
@@ -76,9 +88,13 @@ class NewTripView extends StatelessWidget {
                         _time.format(context),
                         style: const TextStyle(fontSize: 30),
                       )),
-                    )
-                  ],
-                ),
+                    ),
+                    onTap: () async {
+                      _time = await showTimePicker(context: context, initialTime: _time);
+                      setState(() {});
+                    },
+                  )
+                ],
               ),
             ),
             Padding(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jebaa/Classes/trip.dart';
-import 'package:jebaa/Control/bottomnavi.dart';
-import 'package:jebaa/Control/tripcard.dart';
+import 'package:jebaa/Widgets/bottomnavi.dart';
+import 'package:jebaa/Widgets/tripcard.dart';
 import 'package:jebaa/Views/new_trip.dart';
 import 'package:flutter_login/flutter_login.dart';
 

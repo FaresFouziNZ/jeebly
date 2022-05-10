@@ -3,7 +3,7 @@ import 'package:jebaa/classes/order.dart';
 import 'package:jebaa/classes/user.dart';
 
 class Trip {
-  int tid;
+  String tid;
   String destination;
   User user; // from the user
   List<Order> orders;

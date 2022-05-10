@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jebaa/Classes/trip.dart';
+import 'package:jebaa/Views/signin.dart';
 
 class TripCard extends StatefulWidget {
   final Trip trip;
@@ -27,7 +28,7 @@ class _TripCardState extends State<TripCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('Im pressed!');
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MySignIn()));
       },
       child: SizedBox(
         height: 118,
