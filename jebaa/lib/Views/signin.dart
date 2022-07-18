@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login/flutter_login.dart';
-import 'package:jebaa/Views/new_trip.dart';
-
-const users = {
-  'dribbble@gmail.com': '12345',
-  'hunter@gmail.com': 'hunter',
-};
 
 class MySignIn extends StatefulWidget {
   const MySignIn({Key key}) : super(key: key);
@@ -15,46 +8,139 @@ class MySignIn extends StatefulWidget {
 }
 
 class _MySignInState extends State<MySignIn> {
-  Duration get loginTime => Duration(milliseconds: 2250);
-
-  Future<String> _authUser(LoginData data) {
-    debugPrint('Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(data.name)) {
-        return 'User not exists';
-      }
-      if (users[data.name] != data.password) {
-        return 'Password does not match';
-      }
-      return null;
-    });
-  }
-
-  Future<String> _signupUser(SignupData data) {
-    debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      return null;
-    });
-  }
-
-  Future<String> _recoverPassword(String name) {
-    debugPrint('Name: $name');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(name)) {
-        return 'User not exists';
-      }
-      return null;
-    });
-  }
+  String _email, _password;
+  final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    return FlutterLogin(
-      onLogin: _authUser,
-      logo: const AssetImage(
-          'assets/png-clipart-gray-haired-girl-mayuri-shiina-steins-gate-anime-tutu-ru-music-gudi-manga-head.png'),
-      // loginAfterSignUp: true,
-      onRecoverPassword: _recoverPassword,
+    return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(75),
+          child: AppBar(
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.blue[900],
+                    Colors.blue[800],
+                    Colors.blue[400],
+                  ],
+                ),
+              ),
+            ),
+            title: const Center(
+              child: Text(
+                'JEBA',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          )),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 25,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                width: double.infinity,
+                height: 50,
+                child: TextField(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.email),
+                    border: OutlineInputBorder(),
+                    labelText: 'Email',
+                  ),
+                  onChanged: (value) {
+                    _email = value;
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                width: double.infinity,
+                height: 50,
+                child: TextField(
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.lock),
+                    border: OutlineInputBorder(),
+                    labelText: 'Password',
+                  ),
+                  onChanged: (value) {
+                    _password = value;
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  'Forgot Password?',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.blue[900],
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.blue[900],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: 50,
+              child: ElevatedButton(
+                child: const Text('Sign In'),
+                onPressed: () {
+                  print(_email);
+                  print(_password);
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: 50,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.grey[600]),
+                  foregroundColor: MaterialStateProperty.all(Colors.white),
+                ),
+                child: const Text('New user? Sign up'),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

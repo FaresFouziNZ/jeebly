@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:jebaa/Classes/trip.dart';
-import 'package:jebaa/collections_ref.dart';
+import 'package:jebaa/Database/collections_ref.dart';
 
 class DatabaseService extends ChangeNotifier {
   String uid;
