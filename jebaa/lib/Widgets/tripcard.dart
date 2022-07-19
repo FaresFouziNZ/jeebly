@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jebaa/Classes/trip.dart';
-import 'package:jebaa/Views/signin.dart';
+import 'package:jebaa/Views/place_order.dart';
 
 class TripCard extends StatefulWidget {
   final Trip trip;
@@ -28,7 +28,7 @@ class _TripCardState extends State<TripCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MySignIn()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceOrderView()));
       },
       child: SizedBox(
         height: 118,
