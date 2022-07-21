@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class MenuItem extends StatefulWidget {
+class MenuElement extends StatefulWidget {
   String itemName;
-  MenuItem({Key key, this.itemName}) : super(key: key);
+  MenuElement({Key key, this.itemName}) : super(key: key);
 
   @override
-  State<MenuItem> createState() => _MenuItemState();
+  State<MenuElement> createState() => _MenuElementState();
 }
 
-class _MenuItemState extends State<MenuItem> {
+class _MenuElementState extends State<MenuElement> {
   int _itemCounter = 0;
   @override
   Widget build(BuildContext context) {

@@ -20,10 +20,10 @@ class _PlaceOrderViewState extends State<PlaceOrderView> {
       ),
       body: ListView(
         children: [
-          MenuItem(
+          MenuElement(
             itemName: "Shawarma",
           ),
-          MenuItem(
+          MenuElement(
             itemName: "Pepsi",
           )
         ],
