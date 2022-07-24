@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../Classes/food.dart';
+
 class MenuElement extends StatefulWidget {
-  String itemName;
-  MenuElement({Key key, this.itemName}) : super(key: key);
+  Food item;
+  final Function callBack;
+  MenuElement({Key key, this.item, @required this.callBack}) : super(key: key);
 
   @override
   State<MenuElement> createState() => _MenuElementState();
@@ -12,16 +15,16 @@ class _MenuElementState extends State<MenuElement> {
   int _itemCounter = 0;
   @override
   Widget build(BuildContext context) {
-    return ListTile(title: Text(widget.itemName), onTap: () {}, trailing: _buildTrailingWidget());
+    return ListTile(title: Text(widget.item.name), onTap: () {}, trailing: _buildTrailingWidget());
   }
 
   Widget _buildTrailingWidget() {
     return FittedBox(
       child: Row(
         children: [
-          const Text(
-            "10SR",
-            style: TextStyle(
+          Text(
+            widget.item.price.toString() + "SR",
+            style: const TextStyle(
               fontSize: 18,
               color: Colors.grey,
             ),
@@ -32,9 +35,8 @@ class _MenuElementState extends State<MenuElement> {
           IconButton(
             onPressed: () {
               if (_itemCounter > 0) {
-                setState(() {
-                  _itemCounter--;
-                });
+                _itemCounter--;
+                widget.callBack();
               }
             },
             icon: const Icon(Icons.remove),
@@ -42,9 +44,8 @@ class _MenuElementState extends State<MenuElement> {
           Text(_itemCounter.toString()),
           IconButton(
             onPressed: () {
-              setState(() {
-                _itemCounter++;
-              });
+              _itemCounter++;
+              widget.callBack();
             },
             icon: const Icon(Icons.add),
           )
