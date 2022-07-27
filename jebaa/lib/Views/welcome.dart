@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jebaa/Classes/local_user.dart';
 import 'package:jebaa/Views/mainpage.dart';
+import 'package:jebaa/Views/signin.dart';
+import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key key}) : super(key: key);
@@ -11,20 +13,25 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
-  Future<Widget> start() async {
-    await Firebase.initializeApp();
-    return const MainView();
+  Widget navigateAfterSec() {
+    if (Provider.of<LocalUser>(context, listen: false) != null) {
+      return const MainView();
+    } else {
+      return const SignInView();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LocalUser>(context);
     return SplashScreen(
       backgroundColor: Colors.black54,
       image: const Image(
         image: AssetImage(
             'assets/png-clipart-gray-haired-girl-mayuri-shiina-steins-gate-anime-tutu-ru-music-gudi-manga-head.png'),
       ),
-      navigateAfterFuture: start(),
+      seconds: 4,
+      navigateAfterSeconds: navigateAfterSec(),
     );
   }
 }
