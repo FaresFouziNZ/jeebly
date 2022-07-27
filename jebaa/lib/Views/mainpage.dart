@@ -5,8 +5,7 @@ import 'package:jebaa/Widgets/tripcard.dart';
 import 'package:jebaa/Views/new_trip.dart';
 
 class MainView extends StatefulWidget {
-  List<Trip> trips;
-  MainView({Key key, @required this.trips}) : super(key: key);
+  const MainView({Key key}) : super(key: key);
 
   @override
   _MainViewState createState() => _MainViewState();
@@ -44,22 +43,26 @@ class _MainViewState extends State<MainView> {
               const SizedBox(
                 height: 4,
               ),
-              TripCard(
-                trip: Trip(
-                  destination: 'raid',
-                  status: 'O P E N',
-                ),
+              Column(
+                children: [
+                  TripCard(
+                    trip: Trip(
+                      destination: 'Raiq',
+                      status: 'O P E N',
+                    ),
+                  ),
+                  TripCard(
+                      trip: Trip(
+                    destination: 'raid',
+                    status: 'P E N G U I N',
+                  )),
+                  TripCard(
+                      trip: Trip(
+                    destination: 'raid',
+                    status: 'C O M P L E T E',
+                  ))
+                ],
               ),
-              TripCard(
-                  trip: Trip(
-                destination: 'raid',
-                status: 'P E N G U I N',
-              )),
-              TripCard(
-                  trip: Trip(
-                destination: 'raid',
-                status: 'C O M P L E T E',
-              ))
             ],
           ),
         ),

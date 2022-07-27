@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jebaa/Views/mainpage.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import '../Classes/trip.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key key}) : super(key: key);
@@ -14,10 +13,7 @@ class Welcome extends StatefulWidget {
 class _WelcomeState extends State<Welcome> {
   Future<Widget> start() async {
     await Firebase.initializeApp();
-    List<Trip> s;
-    return MainView(
-      trips: s,
-    );
+    return const MainView();
   }
 
   @override

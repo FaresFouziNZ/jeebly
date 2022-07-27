@@ -1,0 +1,3 @@
+class Validation {
+  static validatePassword() {}
+}

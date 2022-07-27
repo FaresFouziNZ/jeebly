@@ -5,4 +5,5 @@ class FirebaseCollections {
   final CollectionReference users = _databaseRef.collection('users');
   final CollectionReference trips = _databaseRef.collection('trip');
   final CollectionReference orders = _databaseRef.collection('orders');
+  final CollectionReference food = _databaseRef.collection('food');
 }

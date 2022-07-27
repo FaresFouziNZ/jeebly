@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jebaa/Classes/food.dart';
 import 'package:jebaa/Classes/trip.dart';
+import 'package:jebaa/Database/database.dart';
 import 'package:jebaa/Widgets/item.dart';
 
 class PlaceOrderView extends StatefulWidget {
@@ -21,29 +21,33 @@ class _PlaceOrderViewState extends State<PlaceOrderView> {
   var selectedFoods = [];
   @override
   Widget build(BuildContext context) {
-    //future builder to get the menu items from the database and display them in the list view
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Place Your Order'),
-      ),
-      body: ListView(
-        // children: allFoods
-        //     .map((e) => MenuElement(
-        //           item: e,
-        //           callBack: callBack,
-        //         ))
-        //     .toList(),
-        children: [
-          MenuElement(
-            callBack: callBack,
-            item: Food(name: 'Pepsi', price: 3),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
+    return FutureBuilder(
+      future: DatabaseService().getFoods(widget.trip.destination),
+      builder: (context, snapshot) {
+        allFoods = snapshot.data;
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Scaffold(
+            body: Center(child: Text('Loading')),
+          );
+        }
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Place Your Order'),
+          ),
+          body: ListView(
+            children: allFoods
+                .map((e) => MenuElement(
+                      item: e,
+                      callBack: callBack,
+                    ))
+                .toList(),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(Icons.add),
+          ),
+        );
+      },
     );
   }
 }

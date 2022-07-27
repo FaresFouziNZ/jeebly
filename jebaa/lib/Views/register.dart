@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:jebaa/Views/register.dart';
+import 'package:jebaa/Views/mainpage.dart';
+import 'package:jebaa/Views/signin.dart';
 
 import '../Database/auth.dart';
 
-class SignInView extends StatefulWidget {
-  const SignInView({Key key}) : super(key: key);
+class RegisterView extends StatefulWidget {
+  const RegisterView({Key key}) : super(key: key);
 
   @override
-  _SignInViewState createState() => _SignInViewState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _SignInViewState extends State<SignInView> {
+class _RegisterViewState extends State<RegisterView> {
   final _auth = AuthService();
-
   String _email = '', _password = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +35,7 @@ class _SignInViewState extends State<SignInView> {
             ),
             title: const Center(
               child: Text(
-                'Login',
+                'Register',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -63,7 +62,9 @@ class _SignInViewState extends State<SignInView> {
                     labelText: 'Email',
                   ),
                   onChanged: (value) {
-                    _email = value;
+                    setState(() {
+                      _email = value;
+                    });
                   },
                 ),
               ),
@@ -81,7 +82,9 @@ class _SignInViewState extends State<SignInView> {
                     labelText: 'Password',
                   ),
                   onChanged: (value) {
-                    _password = value;
+                    setState(() {
+                      _password = value;
+                    });
                   },
                 ),
               ),
@@ -118,35 +121,28 @@ class _SignInViewState extends State<SignInView> {
               width: MediaQuery.of(context).size.width * 0.9,
               height: 50,
               child: ElevatedButton(
-                child: const Text('Sign In'),
+                child: const Text('Register'),
                 onPressed: () async {
                   RegExp regExp = RegExp('.*@.*');
-                  if (_email.isNotEmpty && _password.isNotEmpty) {
-                    if (regExp.hasMatch(_email) && (_password.length > 6)) {
-                      dynamic result = await _auth.signInWithEmailAndPassword(_email, _password);
-                      if (result == null) {
-                        print('Null');
-                        setState(() {});
-                      } else {
-                        //good
-                      }
-                    } else {}
-                  } else {
+                  if (regExp.hasMatch(_email) && (_password.length > 6)) {
+                    await _auth.registerWithEmailAndPassword(_email, _password);
+                    //good
                     showDialog(
                         context: context,
-                        builder: (context) => AlertDialog(
-                              title: const Text('Complete all fields'),
-                              content: const Text('Please fill all the fields'),
+                        builder: (_) => AlertDialog(
+                              title: const Text('Thank you'),
+                              content: const Text('Your have registered'),
                               actions: [
                                 TextButton(
-                                  child: const Text('Ok'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.pushReplacement(
+                                          context, MaterialPageRoute(builder: (context) => const MainView()));
+                                    },
+                                    child: const Text('Ok'))
                               ],
                             ));
-                  }
+                  } else {}
                 },
               ),
             ),
@@ -163,15 +159,15 @@ class _SignInViewState extends State<SignInView> {
                 ),
                 child: const Text('New user? Sign up'),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterView()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignInView(
+                              // trip: widget.trip,
+                              )));
                 },
               ),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  _auth.signOut();
-                },
-                child: const Text('data'))
           ],
         ),
       ),

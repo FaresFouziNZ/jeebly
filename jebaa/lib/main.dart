@@ -1,13 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:jebaa/Views/mainpage.dart';
+import 'package:jebaa/Database/auth.dart';
+import 'package:provider/provider.dart';
 import 'Views/welcome.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    // initialRoute: ,
-    routes: {
-      '/': (context) => const Welcome(),
-    },
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(StreamProvider.value(
+    value: AuthService().user,
+    initialData: null,
+    child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      // initialRoute: ,
+      routes: {
+        '/': (context) => const Welcome(),
+      },
+    ),
   ));
 }
