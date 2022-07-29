@@ -3,21 +3,19 @@ import 'package:jebaa/Classes/restaurant.dart';
 import 'package:jebaa/Widgets/restaurantcard.dart';
 
 class NewTripView extends StatefulWidget {
-  NewTripView({Key key}) : super(key: key);
+  const NewTripView({Key key}) : super(key: key);
 
   @override
   State<NewTripView> createState() => _NewTripViewState();
 }
 
 class _NewTripViewState extends State<NewTripView> {
+  final List<Restaurant> _restaurants = [Restaurant(name: 'raiq'), Restaurant(name: 'raiq2')];
   TimeOfDay _time = TimeOfDay.now();
-
+  String selectedRestaurant = '';
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // appBar: AppBar(
-      //   title: const Text('New Trip'),
-      // ),
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,7 +36,7 @@ class _NewTripViewState extends State<NewTripView> {
                 )),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: SizedBox(
                 //decoration: BoxDecoration(border: Border.all(width: 1)),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
@@ -46,21 +44,39 @@ class _NewTripViewState extends State<NewTripView> {
                     const SizedBox(
                       width: 5,
                     ),
-                    RestaurantCard(
-                      restaurant: Restaurant(name: 'raiq'),
-                    ),
-                    RestaurantCard(
-                      restaurant: Restaurant(name: 'raiq'),
-                    ),
-                    RestaurantCard(
-                      restaurant: Restaurant(name: 'raiq'),
-                    ),
-                    RestaurantCard(
-                      restaurant: Restaurant(name: 'raiq'),
-                    ),
-                    RestaurantCard(
-                      restaurant: Restaurant(name: 'raiq'),
-                    ),
+                    Wrap(
+                      children: List.generate(_restaurants.length, (index) {
+                        return RestaurantCard(
+                          isSelected: selectedRestaurant == _restaurants[index].name,
+                          restaurant: _restaurants[index],
+                          onTap: () {
+                            setState(() {
+                              selectedRestaurant = _restaurants[index].name;
+                              print(selectedRestaurant);
+                            });
+                          },
+                        );
+                      }),
+                    )
+                    // GestureDetector(
+                    //   child: RestaurantCard(
+                    //     restaurant: Restaurant(name: 'raiq'),
+                    //   ),
+                    // ),
+                    // GestureDetector(
+                    //   child: RestaurantCard(
+                    //     restaurant: Restaurant(name: 'raiq'),
+                    //   ),
+                    // ),
+                    // RestaurantCard(
+                    //   restaurant: Restaurant(name: 'raiq'),
+                    // ),
+                    // RestaurantCard(
+                    //   restaurant: Restaurant(name: 'raiq'),
+                    // ),
+                    // RestaurantCard(
+                    //   restaurant: Restaurant(name: 'raiq'),
+                    // ),
                   ],
                 ),
                 //color: Colors.grey[300],
@@ -85,7 +101,7 @@ class _NewTripViewState extends State<NewTripView> {
                       //color: Colors.green[50],
                       child: Center(
                           child: Text(
-                        _time.format(context),
+                        _time?.format(context),
                         style: const TextStyle(fontSize: 30),
                       )),
                     ),

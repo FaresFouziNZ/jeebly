@@ -12,7 +12,6 @@ class SignInView extends StatefulWidget {
 
 class _SignInViewState extends State<SignInView> {
   final _auth = AuthService();
-
   String _email = '', _password = '';
 
   @override
@@ -167,11 +166,6 @@ class _SignInViewState extends State<SignInView> {
                 },
               ),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  _auth.signOut();
-                },
-                child: const Text('data'))
           ],
         ),
       ),
