@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jebaa/Views/mainpage.dart';
 import 'package:jebaa/Views/register.dart';
 
 import '../Database/auth.dart';
@@ -128,6 +129,7 @@ class _SignInViewState extends State<SignInView> {
                         setState(() {});
                       } else {
                         //good
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const MainView()));
                       }
                     } else {}
                   } else {

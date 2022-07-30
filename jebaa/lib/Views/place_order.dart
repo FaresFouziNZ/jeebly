@@ -4,8 +4,9 @@ import 'package:jebaa/Database/database.dart';
 import 'package:jebaa/Widgets/item.dart';
 
 class PlaceOrderView extends StatefulWidget {
-  Trip trip;
-  PlaceOrderView({Key key, this.trip}) : super(key: key);
+  final Trip trip;
+  final bool isDriver;
+  const PlaceOrderView({Key key, this.trip, @required this.isDriver}) : super(key: key);
 
   @override
   _PlaceOrderViewState createState() => _PlaceOrderViewState();

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jebaa/Classes/local_user.dart';
 import 'package:jebaa/Classes/restaurant.dart';
+import 'package:jebaa/Classes/trip.dart';
+import 'package:jebaa/Views/place_order.dart';
 import 'package:jebaa/Widgets/restaurantcard.dart';
+import 'package:provider/provider.dart';
 
 class NewTripView extends StatefulWidget {
   const NewTripView({Key key}) : super(key: key);
@@ -15,6 +19,8 @@ class _NewTripViewState extends State<NewTripView> {
   String selectedRestaurant = '';
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<LocalUser>(context);
+
     return SizedBox(
       child: Center(
         child: Column(
@@ -57,26 +63,7 @@ class _NewTripViewState extends State<NewTripView> {
                           },
                         );
                       }),
-                    )
-                    // GestureDetector(
-                    //   child: RestaurantCard(
-                    //     restaurant: Restaurant(name: 'raiq'),
-                    //   ),
-                    // ),
-                    // GestureDetector(
-                    //   child: RestaurantCard(
-                    //     restaurant: Restaurant(name: 'raiq'),
-                    //   ),
-                    // ),
-                    // RestaurantCard(
-                    //   restaurant: Restaurant(name: 'raiq'),
-                    // ),
-                    // RestaurantCard(
-                    //   restaurant: Restaurant(name: 'raiq'),
-                    // ),
-                    // RestaurantCard(
-                    //   restaurant: Restaurant(name: 'raiq'),
-                    // ),
+                    ),
                   ],
                 ),
                 //color: Colors.grey[300],
@@ -116,7 +103,15 @@ class _NewTripViewState extends State<NewTripView> {
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PlaceOrderView(
+                                  isDriver: true,
+                                  trip: Trip(destination: selectedRestaurant, uid: user.uid),
+                                )));
+                  },
                   style: ElevatedButton.styleFrom(minimumSize: const Size(350, 50)),
                   child: const Text('Place the Trip!')),
             ),
