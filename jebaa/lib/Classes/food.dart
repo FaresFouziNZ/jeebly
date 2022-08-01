@@ -19,4 +19,9 @@ class Food {
       quantity: map['quantity'],
     );
   }
+
+  @override
+  String toString() {
+    return 'Food{name: $name, price: $price, quantity: $quantity}';
+  }
 }

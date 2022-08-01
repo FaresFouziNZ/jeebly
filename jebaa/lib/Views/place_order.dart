@@ -4,6 +4,8 @@ import 'package:jebaa/Classes/trip.dart';
 import 'package:jebaa/Database/database.dart';
 import 'package:jebaa/Widgets/item.dart';
 
+import '../Classes/food.dart';
+
 class PlaceOrderView extends StatefulWidget {
   final Trip trip;
   final bool isDriver;
@@ -15,12 +17,22 @@ class PlaceOrderView extends StatefulWidget {
 
 class _PlaceOrderViewState extends State<PlaceOrderView> {
   var allFoods = [];
+  var selectedFoods = [];
 
-  callBack() {
-    setState(() {});
+  callBack(Food newItem) {
+    if (newItem != null) {
+      for (int i = 0; i < selectedFoods.length; i++) {
+        if (selectedFoods[i].name == newItem.name) {
+          selectedFoods.removeAt(i);
+          break;
+        }
+      }
+      if (newItem.quantity != 0) {
+        selectedFoods.add(newItem);
+      }
+    }
   }
 
-  var selectedFoods = [];
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -53,7 +65,12 @@ class _PlaceOrderViewState extends State<PlaceOrderView> {
                 .toList(),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              for (int i = 0; i < selectedFoods.length; i++) {
+                print('item $i');
+                print(selectedFoods[i].toString());
+              }
+            },
             child: const Icon(Icons.add),
           ),
         );

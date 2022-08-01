@@ -36,7 +36,9 @@ class _MenuElementState extends State<MenuElement> {
             onPressed: () {
               if (_itemCounter > 0) {
                 _itemCounter--;
-                widget.callBack();
+                setState(() {});
+                Food selectedFood = Food(name: widget.item.name, price: widget.item.price, quantity: _itemCounter);
+                widget.callBack(selectedFood);
               }
             },
             icon: const Icon(Icons.remove),
@@ -45,7 +47,9 @@ class _MenuElementState extends State<MenuElement> {
           IconButton(
             onPressed: () {
               _itemCounter++;
-              widget.callBack();
+              setState(() {});
+              Food selectedFood = Food(name: widget.item.name, price: widget.item.price, quantity: _itemCounter);
+              widget.callBack(selectedFood);
             },
             icon: const Icon(Icons.add),
           )
