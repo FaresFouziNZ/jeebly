@@ -14,7 +14,13 @@ class NewTripView extends StatefulWidget {
 }
 
 class _NewTripViewState extends State<NewTripView> {
-  final List<Restaurant> _restaurants = [Restaurant(name: 'raiq'), Restaurant(name: 'raiq2')];
+  final List<Restaurant> _restaurants = [
+    Restaurant(name: 'Raiq'),
+    Restaurant(name: 'raiq2'),
+    Restaurant(name: 'raiq2'),
+    Restaurant(name: 'raiq2'),
+    Restaurant(name: 'raiq2')
+  ];
   TimeOfDay _time = TimeOfDay.now();
   String selectedRestaurant = '';
   @override
@@ -43,30 +49,36 @@ class _NewTripViewState extends State<NewTripView> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
-                //decoration: BoxDecoration(border: Border.all(width: 1)),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
                     const SizedBox(
                       width: 5,
                     ),
-                    Wrap(
-                      children: List.generate(_restaurants.length, (index) {
-                        return RestaurantCard(
-                          isSelected: selectedRestaurant == _restaurants[index].name,
-                          restaurant: _restaurants[index],
-                          onTap: () {
-                            setState(() {
-                              selectedRestaurant = _restaurants[index].name;
-                              print(selectedRestaurant);
-                            });
-                          },
-                        );
-                      }),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Wrap(
+                        children: List.generate(_restaurants.length, (index) {
+                          return RestaurantCard(
+                            isSelected: selectedRestaurant == _restaurants[index].name,
+                            restaurant: _restaurants[index],
+                            onTap: () {
+                              setState(() {
+                                selectedRestaurant = _restaurants[index].name;
+                              });
+                            },
+                          );
+                        }),
+                      ),
                     ),
                   ],
                 ),
-                //color: Colors.grey[300],
                 width: 350,
                 height: 110,
               ),
@@ -85,15 +97,14 @@ class _NewTripViewState extends State<NewTripView> {
                       width: 300,
                       height: 50,
                       decoration: BoxDecoration(border: Border.all(width: 1)),
-                      //color: Colors.green[50],
                       child: Center(
                           child: Text(
-                        _time?.format(context),
+                        _time?.format(context) ?? TimeOfDay.now().format(context),
                         style: const TextStyle(fontSize: 30),
                       )),
                     ),
                     onTap: () async {
-                      _time = await showTimePicker(context: context, initialTime: _time);
+                      _time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
                       setState(() {});
                     },
                   )
@@ -109,7 +120,7 @@ class _NewTripViewState extends State<NewTripView> {
                         MaterialPageRoute(
                             builder: (context) => PlaceOrderView(
                                   isDriver: true,
-                                  trip: Trip(destination: selectedRestaurant, uid: user.uid),
+                                  trip: Trip(destination: selectedRestaurant, uid: user.uid, time: _time),
                                 )));
                   },
                   style: ElevatedButton.styleFrom(minimumSize: const Size(350, 50)),

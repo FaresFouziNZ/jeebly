@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jebaa/Classes/trip.dart';
-import 'package:jebaa/Views/signin.dart';
+import 'package:jebaa/Views/place_order.dart';
 
 class TripCard extends StatefulWidget {
   final Trip trip;
@@ -12,13 +12,13 @@ class TripCard extends StatefulWidget {
 
 class _TripCardState extends State<TripCard> {
   Color s() {
-    if (widget.trip.status == 'O P E N') {
+    if (widget.trip.isClosed == 'O P E N') {
       return Colors.green;
     }
-    if (widget.trip.status == 'P E N G U I N') {
+    if (widget.trip.isClosed == 'P E N G U I N') {
       return Colors.amber;
     }
-    if (widget.trip.status == 'C O M P L E T E') {
+    if (widget.trip.isClosed == 'C O M P L E T E') {
       return Colors.grey;
     }
     return Colors.pinkAccent;
@@ -31,8 +31,9 @@ class _TripCardState extends State<TripCard> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const SignInView(
-                    // trip: widget.trip,
+                builder: (context) => PlaceOrderView(
+                      isDriver: false,
+                      trip: widget.trip,
                     )));
       },
       child: SizedBox(
@@ -81,7 +82,7 @@ class _TripCardState extends State<TripCard> {
                     const SizedBox(
                       height: 90,
                     ),
-                    Text(widget.trip.status, style: const TextStyle(fontSize: 16))
+                    Text(widget.trip.isClosed, style: const TextStyle(fontSize: 16))
                   ],
                 )
               ],

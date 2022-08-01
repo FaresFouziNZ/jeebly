@@ -4,8 +4,8 @@ import 'package:jebaa/Classes/restaurant.dart';
 class RestaurantCard extends StatelessWidget {
   final Restaurant restaurant;
   final Function onTap;
-  bool isSelected;
-  RestaurantCard({Key key, @required this.restaurant, this.onTap, this.isSelected}) : super(key: key);
+  final bool isSelected;
+  const RestaurantCard({Key key, @required this.restaurant, this.onTap, this.isSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

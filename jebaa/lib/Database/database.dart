@@ -48,7 +48,7 @@ class DatabaseService extends ChangeNotifier {
   // Future CreateUser{}
   Future<List<Food>> getFoods(String restaurantName) async {
     List<Food> foods = [];
-    await collections.food.where('restaurantName', isEqualTo: restaurantName).get().then((value) {
+    await collections.food.doc(restaurantName).collection('Menu').get().then((value) {
       for (var element in value.docs) {
         foods.add(Food.fromMap(element.data()));
       }

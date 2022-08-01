@@ -48,18 +48,18 @@ class _MainViewState extends State<MainView> {
                   TripCard(
                     trip: Trip(
                       destination: 'Raiq',
-                      status: 'O P E N',
+                      isClosed: 'O P E N',
                     ),
                   ),
                   TripCard(
                       trip: Trip(
                     destination: 'raid',
-                    status: 'P E N G U I N',
+                    isClosed: 'P E N G U I N',
                   )),
                   TripCard(
                       trip: Trip(
                     destination: 'raid',
-                    status: 'C O M P L E T E',
+                    isClosed: 'C O M P L E T E',
                   ))
                 ],
               ),
@@ -79,7 +79,7 @@ class _MainViewState extends State<MainView> {
               showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
-                    return SingleChildScrollView(
+                    return const SingleChildScrollView(
                       child: NewTripView(),
                     );
                   });

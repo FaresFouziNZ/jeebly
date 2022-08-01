@@ -1,6 +1,6 @@
 class Food {
   String name;
-  double price;
+  String price;
   int quantity = 0;
   Food({this.name, this.price, this.quantity});
 

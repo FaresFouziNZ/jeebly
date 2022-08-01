@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:jebaa/Classes/trip.dart';
 import 'package:jebaa/Database/database.dart';
 import 'package:jebaa/Widgets/item.dart';
@@ -27,8 +28,16 @@ class _PlaceOrderViewState extends State<PlaceOrderView> {
       builder: (context, snapshot) {
         allFoods = snapshot.data;
         if (snapshot.connectionState != ConnectionState.done) {
-          return const Scaffold(
-            body: Center(child: Text('Loading')),
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Place Your Order'),
+            ),
+            body: const Center(
+              child: SpinKitPulse(
+                color: Colors.blue,
+                size: 50,
+              ),
+            ),
           );
         }
         return Scaffold(
