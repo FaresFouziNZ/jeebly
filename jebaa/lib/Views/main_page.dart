@@ -67,6 +67,7 @@ class _MainViewState extends State<MainView> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
+            heroTag: 'newTrip',
             backgroundColor: Colors.grey[100],
             shape: const RoundedRectangleBorder(),
             child: Image.asset(

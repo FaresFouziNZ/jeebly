@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jebaa/Views/mainpage.dart';
+import 'package:jebaa/Views/main_page.dart';
 import 'package:jebaa/Views/signin.dart';
 
 import '../Database/auth.dart';

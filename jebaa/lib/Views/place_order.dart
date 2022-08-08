@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:jebaa/Classes/trip.dart';
 import 'package:jebaa/Database/database.dart';
+import 'package:jebaa/Views/order_summery.dart';
 import 'package:jebaa/Widgets/item.dart';
 
 import '../Classes/food.dart';
@@ -17,7 +18,7 @@ class PlaceOrderView extends StatefulWidget {
 
 class _PlaceOrderViewState extends State<PlaceOrderView> {
   var allFoods = [];
-  var selectedFoods = [];
+  List<Food> selectedFoods = [];
 
   callBack(Food newItem) {
     if (newItem != null) {
@@ -65,10 +66,28 @@ class _PlaceOrderViewState extends State<PlaceOrderView> {
                 .toList(),
           ),
           floatingActionButton: FloatingActionButton(
+            heroTag: 'placeOrder',
             onPressed: () {
-              for (int i = 0; i < selectedFoods.length; i++) {
-                print('item $i');
-                print(selectedFoods[i].toString());
+              if (selectedFoods.isEmpty) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Please Select Food'),
+                    actions: [
+                      ElevatedButton(
+                        child: const Text('Ok'),
+                        onPressed: () => Navigator.pop(context),
+                      )
+                    ],
+                  ),
+                );
+              } else {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => OrderSummeryView(
+                              allFoods: selectedFoods,
+                            )));
               }
             },
             child: const Icon(Icons.add),

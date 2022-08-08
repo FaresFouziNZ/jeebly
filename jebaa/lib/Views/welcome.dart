@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jebaa/Classes/local_user.dart';
-import 'package:jebaa/Views/mainpage.dart';
+import 'package:jebaa/Views/main_page.dart';
 import 'package:jebaa/Views/signin.dart';
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';

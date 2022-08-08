@@ -11,6 +11,7 @@ void main() async {
     value: AuthService().user,
     initialData: null,
     child: MaterialApp(
+      theme: ThemeData(scaffoldBackgroundColor: const Color(0xFFeaeef7)),
       debugShowCheckedModeBanner: false,
       // initialRoute: ,
       routes: {
