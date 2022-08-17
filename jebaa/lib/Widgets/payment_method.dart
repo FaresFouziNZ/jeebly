@@ -20,7 +20,7 @@ class PaymentMethod extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: Image(
-                    image: AssetImage('assets/Bank/$method.png'),
+                    image: AssetImage('assets/BankIcon/$method.png'),
                     width: 50,
                     height: 50,
                   ),

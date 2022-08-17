@@ -9,7 +9,7 @@ class SelectPayment extends StatefulWidget {
 }
 
 class _SelectPaymentState extends State<SelectPayment> {
-  List<String> paymentMethods = ['Stcpay', 'Inma', 'NSB'];
+  List<String> paymentMethods = ['Stc Pay', 'Inma', 'NSB'];
   @override
   Widget build(BuildContext context) {
     //final user = Provider.of<LocalUser>(context);
