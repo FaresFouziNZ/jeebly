@@ -7,16 +7,18 @@ class PaymentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> paymentMethods = ['Stc Pay', 'Bank Transfer', 'Cash On Delivery'];
+    String selectedMethod = '';
 
     return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
+      onTap: () async {
+        selectedMethod = await showModalBottomSheet(
             context: context,
             builder: (BuildContext context) {
               return const SingleChildScrollView(
                 child: SelectPayment(),
               );
             });
+        if (selectedMethod != null) {}
       },
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.75,
