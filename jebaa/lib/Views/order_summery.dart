@@ -86,7 +86,23 @@ class _OrderSummeryViewState extends State<OrderSummeryView> {
           ElevatedButton(
             child: const Text('Place Order'),
             style: ElevatedButton.styleFrom(minimumSize: const Size(350, 50)),
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                        title: const Text('Thank you'),
+                        content: const Text('Your have registered'),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                // Navigator.pop(context);
+                                // Navigator.pushReplacement(
+                                //     context, MaterialPageRoute(builder: (context) => const MainView()));
+                              },
+                              child: const Text('Ok'))
+                        ],
+                      ));
+            },
           ),
         ],
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:jebaa/Classes/trip.dart';
 import 'package:jebaa/Database/database.dart';
-import 'package:jebaa/Views/order_summery.dart';
+import 'package:jebaa/Views/recipe.dart';
 import 'package:jebaa/Widgets/item.dart';
 
 import '../Classes/food.dart';
@@ -82,10 +82,17 @@ class _PlaceOrderViewState extends State<PlaceOrderView> {
                   ),
                 );
               } else {
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => OrderSummeryView(
+                //               allFoods: selectedFoods,
+                //             )));
+                Navigator.pop(context);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => OrderSummeryView(
+                        builder: (context) => RecipeView(
                               allFoods: selectedFoods,
                             )));
               }
