@@ -88,7 +88,6 @@ class _PlaceOrderViewState extends State<PlaceOrderView> {
                 //         builder: (context) => OrderSummeryView(
                 //               allFoods: selectedFoods,
                 //             )));
-                Navigator.pop(context);
                 Navigator.push(
                     context,
                     MaterialPageRoute(

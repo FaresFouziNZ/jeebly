@@ -75,6 +75,7 @@ class _SignInViewState extends State<SignInView> {
                 width: double.infinity,
                 height: 50,
                 child: TextField(
+                  obscureText: true,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     border: OutlineInputBorder(),
@@ -129,7 +130,7 @@ class _SignInViewState extends State<SignInView> {
                         setState(() {});
                       } else {
                         //good
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const MainView()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainView()));
                       }
                     } else {}
                   } else {
@@ -164,7 +165,7 @@ class _SignInViewState extends State<SignInView> {
                 ),
                 child: const Text('New user? Sign up'),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterView()));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RegisterView()));
                 },
               ),
             ),

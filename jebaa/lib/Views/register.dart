@@ -125,23 +125,29 @@ class _RegisterViewState extends State<RegisterView> {
                 onPressed: () async {
                   RegExp regExp = RegExp('.*@.*');
                   if (regExp.hasMatch(_email) && (_password.length > 6)) {
-                    await _auth.registerWithEmailAndPassword(_email, _password);
-                    //good
-                    showDialog(
-                        context: context,
-                        builder: (_) => AlertDialog(
-                              title: const Text('Thank you'),
-                              content: const Text('Your have registered'),
-                              actions: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      Navigator.pushReplacement(
-                                          context, MaterialPageRoute(builder: (context) => const MainView()));
-                                    },
-                                    child: const Text('Ok'))
-                              ],
-                            ));
+                    var result = await _auth.registerWithEmailAndPassword(_email, _password);
+                    print(_email);
+                    print(_password);
+                    if (result[0] == null) {
+                      print(result[1].toString());
+                    } else {
+                      //good
+                      showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                                title: const Text('Thank you'),
+                                content: const Text('Your have registered'),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.pushReplacement(
+                                            context, MaterialPageRoute(builder: (context) => const MainView()));
+                                      },
+                                      child: const Text('Ok'))
+                                ],
+                              ));
+                    }
                   } else {}
                 },
               ),

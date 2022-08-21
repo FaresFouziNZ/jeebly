@@ -16,18 +16,24 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: const Text(
+            'Home',
+            style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+          centerTitle: true,
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(
-                height: 25,
-              ),
-              const Text(
-                'Home',
-                style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 25,
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 25),
+                // child: Text(
+                //   'Home',
+                //   style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                // ),
               ),
               Row(
                 children: const [
@@ -68,10 +74,13 @@ class _MainViewState extends State<MainView> {
         ),
         floatingActionButton: FloatingActionButton(
             heroTag: 'newTrip',
-            backgroundColor: Colors.grey[100],
-            shape: const RoundedRectangleBorder(),
-            child: Image.asset(
-                'assets/png-clipart-gray-haired-girl-mayuri-shiina-steins-gate-anime-tutu-ru-music-gudi-manga-head.png'),
+            // backgroundColor: Colors.transparent,
+            //  shape: const RoundedRectangleBorder(),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              // child: Image.asset(
+              //     'assets/png-clipart-gray-haired-girl-mayuri-shiina-steins-gate-anime-tutu-ru-music-gudi-manga-head.png'),
+            ),
             onPressed: () {
               // Navigator.push(
               //   context,
@@ -86,7 +95,7 @@ class _MainViewState extends State<MainView> {
                   });
             }),
         //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: const MyBottomNavigator(),
+        bottomNavigationBar: const MyBottomNavigator(currentIndex: 0),
       ),
     );
   }

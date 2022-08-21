@@ -27,7 +27,8 @@ class AuthService {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User user = result.user;
       return _userFromFirebase(user);
-    } catch (e) {
+    } catch (error) {
+      print(error.toString());
       return null;
     }
   }
@@ -42,7 +43,8 @@ class AuthService {
       User user = result?.user;
 
       return _userFromFirebase(user);
-    } catch (e) {
+    } catch (error) {
+      print(error.toString());
       return null;
     }
   }

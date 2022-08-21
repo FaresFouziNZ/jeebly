@@ -24,14 +24,17 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<LocalUser>(context);
-    return SplashScreen(
-      backgroundColor: Colors.black54,
-      image: const Image(
-        image: AssetImage(
-            'assets/png-clipart-gray-haired-girl-mayuri-shiina-steins-gate-anime-tutu-ru-music-gudi-manga-head.png'),
+    return Provider.value(
+      value: 0,
+      child: SplashScreen(
+        backgroundColor: Colors.black54,
+        image: const Image(
+          image: AssetImage(
+              'assets/png-clipart-gray-haired-girl-mayuri-shiina-steins-gate-anime-tutu-ru-music-gudi-manga-head.png'),
+        ),
+        seconds: 4,
+        navigateAfterSeconds: navigateAfterSec(),
       ),
-      seconds: 4,
-      navigateAfterSeconds: navigateAfterSec(),
     );
   }
 }

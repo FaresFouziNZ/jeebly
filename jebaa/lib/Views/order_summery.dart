@@ -15,96 +15,122 @@ class OrderSummeryView extends StatefulWidget {
 class _OrderSummeryViewState extends State<OrderSummeryView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Order Summery'),
-      ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          const SummaryTopWidget(),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          const Text('Order'),
-          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-          Container(
-            color: const Color(0xFFf9faff),
-            width: MediaQuery.of(context).size.width * 0.75,
-            height: MediaQuery.of(context).size.height * 0.2,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
-                  ),
-                  Column(
-                    children: widget.allFoods.map((e) => OrderSummaryItem(item: e)).toList(),
-                  ),
-                ],
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Order Summery'),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
-            ),
-          ),
-          Container(
-            color: const Color(0xFFf9faff),
-            width: MediaQuery.of(context).size.width * 0.75,
-            height: MediaQuery.of(context).size.height * 0.09,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
+              const SummaryTopWidget(),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.025,
+              ),
+              const Text('Order'),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              Container(
+                color: const Color(0xFFf9faff),
+                width: MediaQuery.of(context).size.width * 0.75,
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
+                      ),
+                      Column(
+                        children: widget.allFoods.map((e) => OrderSummaryItem(item: e)).toList(),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                color: const Color(0xFFf9faff),
+                width: MediaQuery.of(context).size.width * 0.75,
+                height: MediaQuery.of(context).size.height * 0.09,
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
-                      child: Text(
-                        'Total: ',
-                        style: TextStyle(fontSize: 14, color: Colors.black),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 24),
+                          child: Text(
+                            'Total: ',
+                            style: TextStyle(fontSize: 14, color: Colors.black),
+                          ),
+                        ),
+                        const Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Text(
+                            '\$' +
+                                (widget.allFoods.map((e) => double.parse(e.price) * e.quantity).reduce((a, b) => a + b))
+                                    .toString(),
+                            style: const TextStyle(fontSize: 14, color: Colors.black),
+                          ),
+                        ),
+                      ],
                     ),
-                    const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Text(
-                        '\$' +
-                            (widget.allFoods.map((e) => double.parse(e.price) * e.quantity).reduce((a, b) => a + b))
-                                .toString(),
-                        style: const TextStyle(fontSize: 14, color: Colors.black),
-                      ),
-                    ),
+                    const PaymentWidget(),
                   ],
                 ),
-                const PaymentWidget(),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: MediaQuery.of(context).size.height * 0.32),
+                child: const Text('Notes'),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: 150,
+                child: const TextField(
+                  expands: true,
+                  maxLines: null,
+                  decoration: InputDecoration(
+                      enabled: true,
+                      border: OutlineInputBorder(),
+                      filled: true,
+                      fillColor: Colors.white,
+                      focusColor: Colors.red),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: ElevatedButton(
+                  child: const Text('Place Order'),
+                  style: ElevatedButton.styleFrom(minimumSize: const Size(350, 50)),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                              title: const Text('Thank you'),
+                              content: const Text('Your have registered'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      // Navigator.pop(context);
+                                      // Navigator.pushReplacement(
+                                      //     context, MaterialPageRoute(builder: (context) => const MainView()));
+                                    },
+                                    child: const Text('Ok'))
+                              ],
+                            ));
+                  },
+                ),
+              ),
+            ],
           ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          ElevatedButton(
-            child: const Text('Place Order'),
-            style: ElevatedButton.styleFrom(minimumSize: const Size(350, 50)),
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (_) => AlertDialog(
-                        title: const Text('Thank you'),
-                        content: const Text('Your have registered'),
-                        actions: [
-                          TextButton(
-                              onPressed: () {
-                                // Navigator.pop(context);
-                                // Navigator.pushReplacement(
-                                //     context, MaterialPageRoute(builder: (context) => const MainView()));
-                              },
-                              child: const Text('Ok'))
-                        ],
-                      ));
-            },
-          ),
-        ],
+        ),
       ),
     );
   }
